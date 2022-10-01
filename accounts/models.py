@@ -39,7 +39,7 @@ class CustomUserManager(BaseUserManager):
 
 class User(AbstractUser):
     is_hospital = models.BooleanField(default=False)
-    ph_no = models.CharField(max_length=10, validators=[validate_contact_number])
+    ph_no = models.CharField(max_length=10, validators=[validate_contact_number], blank=False, unique=True)
     email = models.EmailField(unique=True)
     REQUIRED_FIELDS = ['email', 'ph_no']
 
