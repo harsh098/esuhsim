@@ -41,7 +41,7 @@ class User(AbstractUser):
     is_hospital = models.BooleanField(default=False)
     ph_no = models.CharField(max_length=10, validators=[validate_contact_number], blank=False, unique=True)
     email = models.EmailField(unique=True)
-    website = models.URLField(blank=True, default="")
+
     REQUIRED_FIELDS = ['email', 'ph_no']
 
     objects = CustomUserManager()
@@ -54,6 +54,8 @@ class Hospital(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, blank=False)
     address = models.CharField(max_length=255, blank=False)
+    city = models.CharField(max_length=255, blank=False, default='New Delhi')
+    website = models.URLField(blank=True, default="")
     location = models.URLField(blank=False)
 
     def __str__(self):
