@@ -22,12 +22,15 @@ class Hospital(models.Model):
     location = models.URLField(blank=False)
 
     def __str__(self):
-        return str(user)
+        return str(self.user)
 
 
 class PublicUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(blank=False)
+
+    def __str__(self):
+        return str(self.user)
 
 
 
