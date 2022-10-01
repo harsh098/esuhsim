@@ -7,14 +7,14 @@ class UserAdmin(Useradmin):
     fieldsets = (
         (None, {'fields': ('username', 'email', 'password')}),
         ('Permissions', {
-            'fields': ('is_staff', 'groups', 'user_permissions', 'is_hospital',),
+            'fields': ('is_staff', 'groups', 'user_permissions', 'is_hospital', "ph_no"),
         }),
     )
 
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'password1', 'password2', "is_hospital",),
+            'fields': ('username', 'email', 'password1', 'password2', "is_hospital", "ph_no",),
 
         }),
     )
