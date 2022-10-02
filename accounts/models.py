@@ -13,12 +13,12 @@ class CustomUserManager(BaseUserManager):
         """
         Create and save a User with the given email and password.
         """
-        if not username:
+        if not username or (username == ''):
             raise ValueError('Blank Username not allowed')
         if not email:
             raise ValueError('The Email must be set')
         email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
+        user = self.model(username=username, email=email, **extra_fields)
         user.set_password(password)
         user.save()
         return user
@@ -51,7 +51,7 @@ class User(AbstractUser):
 
 
 class Hospital(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, related_name='hospital', on_delete=models.CASCADE)
     name = models.CharField(max_length=255, blank=False)
     address = models.CharField(max_length=255, blank=False)
     city = models.CharField(max_length=255, blank=False, default='New Delhi')
@@ -63,7 +63,7 @@ class Hospital(models.Model):
 
 
 class PublicUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, related_name='publicUser', on_delete=models.CASCADE)
     name = models.CharField(max_length=255, blank=False)
 
     def __str__(self):
